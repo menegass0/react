@@ -16,3 +16,11 @@
     margin-bottom: 0;
 }
 
+.correct{
+    background: #0bdc03;
+    font-weight: bold;
+}
+.wrong{
+    background: #3c0e70;
+    opacity: 0.4;
+}
