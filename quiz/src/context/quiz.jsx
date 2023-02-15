@@ -8,10 +8,10 @@ const initialState ={
     questions,
     currentQuestion:0,
     score: 0,
+    answerSelected: false,
 }
 
 const quizReducer = (state, action)=>{
-    console.log(state, action);
 
     switch(action.type){
         case "CHANGE_STATE":
@@ -29,6 +29,7 @@ const quizReducer = (state, action)=>{
                 questions: reorderedQuestions,
             };
         case "CHANGE_QUESTION":
+            if(state.answerSelected) return state;
             const nextQuestion = state.currentQuestion +1;
             let endGame = false;
 
@@ -44,6 +45,19 @@ const quizReducer = (state, action)=>{
 
         case "NEW_GAME":
             return initialState;
+
+        case "CHECK_ANSWER":
+            const answer = action.payload.answer,
+            option = action.payload.option;
+            let correctAnswer = 0;
+            
+            if(answer === option)correctAnswer = 1;
+
+            return{
+                ...state,
+                score: state.score + correctAnswer,
+                answerSelected:option,
+            }
 
         default:
             return state;
