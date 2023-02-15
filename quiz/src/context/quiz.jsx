@@ -29,7 +29,7 @@ const quizReducer = (state, action)=>{
                 questions: reorderedQuestions,
             };
         case "CHANGE_QUESTION":
-            if(state.answerSelected) return state;
+
             const nextQuestion = state.currentQuestion +1;
             let endGame = false;
 
@@ -47,6 +47,7 @@ const quizReducer = (state, action)=>{
             return initialState;
 
         case "CHECK_ANSWER":
+            if(state.answerSelected) return state;
             const answer = action.payload.answer,
             option = action.payload.option;
             let correctAnswer = 0;
